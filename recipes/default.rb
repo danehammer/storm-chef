@@ -40,12 +40,13 @@ end
 # https://github.com/nathanmarz/storm/wiki/Installing-native-dependencies
 case node[:platform]
 when "redhat"
+
     cookbook_file "/tmp/zeromq-2.1.7-1.el6.x86_64.rpm" do
-      source "rpms/zeromq-2.1.7-1.el6.x86_64.rpm"
+      source "zeromq-2.1.7-1.el6.x86_64.rpm"
     end
 
     cookbook_file "/tmp/jzmq-2.1.0-1.el6.x86_64.rpm" do
-      source "rpms/jzmq-2.1.0-1.el6.x86_64.rpm"
+      source "jzmq-2.1.0-1.el6.x86_64.rpm"
     end
 
     package "zeromq" do
