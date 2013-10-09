@@ -38,12 +38,12 @@ end
 # https://github.com/nathanmarz/storm/wiki/Installing-native-dependencies
 package "zeromq" do
   action :install
-  version "2.1.7"
+  version "2.1.7-1.el6"
 end
 
 package "jzmq" do
   action :install
-  version "2.1.0"
+  version "2.1.0-1.el6"
 end
 
 #locate the nimbus for this storm cluster
