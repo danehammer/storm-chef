@@ -34,19 +34,32 @@ node.set['storm']['install_dir'] = install_dir
   end
 end
 
+
+
 # need to control the versions of zeromq and jzmq, see:
 # https://github.com/nathanmarz/storm/wiki/Installing-native-dependencies
 case node[:platform]
 when "redhat"
-  package "zeromq" do
-    action :install
-    source "rpms/zeromq-2.1.7-1.el6.x86_64.rpm"
-  end
-  package "jzmq" do
-    action :install
-    source "rpms/jzmq-2.1.0-1.el6.x86_64.rpm"
-  end
+    cookbook_file "/tmp/zeromq-2.1.7-1.el6.x86_64.rpm" do
+      source "rpms/zeromq-2.1.7-1.el6.x86_64.rpm"
+    end
+
+    cookbook_file "/tmp/jzmq-2.1.0-1.el6.x86_64.rpm" do
+      source "rpms/jzmq-2.1.0-1.el6.x86_64.rpm"
+    end
+
+    package "zeromq" do
+      action :install
+      source "/tmp/zeromq-2.1.7-1.el6.x86_64.rpm"
+    end
+      
+    package "jzmq" do
+      action :install
+      source "/tmp/jzmq-2.1.0-1.el6.x86_64.rpm"
+    end
+
 when "ubuntu"
+  # TODO need to fix this to follow what I did for redhat
   package "zeromq" do
     action :install
     source "debs/zeromq_2.1.7-1_amd64.deb"
