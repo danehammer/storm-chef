@@ -28,10 +28,22 @@ node.set['storm']['bin_dir'] = "#{install_dir}/bin"
 node.set['storm']['install_dir'] = install_dir
 
 # install dependency packages
-%w{unzip python zeromq jzmq}.each do |pkg|
+%w{unzip python}.each do |pkg|
   package pkg do
     action :install
   end
+end
+
+# need to control the versions of zeromq and jzmq, see:
+# https://github.com/nathanmarz/storm/wiki/Installing-native-dependencies
+package "zeromq" do
+  action :install
+  version "2.1.7-1"
+end
+
+package "jzmq" do
+  action :install
+  version "2.1.0-1"
 end
 
 #locate the nimbus for this storm cluster
