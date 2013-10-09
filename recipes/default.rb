@@ -36,6 +36,27 @@ end
 
 # need to control the versions of zeromq and jzmq, see:
 # https://github.com/nathanmarz/storm/wiki/Installing-native-dependencies
+case node[:platform]
+when "redhat"
+  package "zeromq" do
+    action :install
+    source "rpms/zeromq-2.1.7-1.el6.x86_64.rpm"
+  end
+  package "jzmq" do
+    action :install
+    source "rpms/jzmq-2.1.0-1.el6.x86_64.rpm"
+  end
+when "ubuntu"
+  package "zeromq" do
+    action :install
+    source "debs/zeromq_2.1.7-1_amd64.deb"
+  end
+  package "jzmq" do
+    action :install
+    source "debs/jzmq_2.1.0-1_amd64.deb"
+  end
+end
+
 package "zeromq" do
   action :install
   version "2.1.7-1.el6"
